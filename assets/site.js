@@ -18,6 +18,19 @@
     });
   }
 
+  /* Mobile sticky CTA: show after the first screen, hide while the contact form is visible */
+  var mcta = document.querySelector('.mcta');
+  if (mcta && 'IntersectionObserver' in window) {
+    var top = document.querySelector('.hero, .page-hero');
+    var contact = document.getElementById('contatto') || document.getElementById('contact');
+    var pastTop = !top, atContact = false;
+    var update = function () { mcta.classList.toggle('show', pastTop && !atContact); };
+    if (top) new IntersectionObserver(function (e) { pastTop = !e[0].isIntersecting; update(); }).observe(top);
+    if (contact) new IntersectionObserver(function (e) { atContact = e[0].isIntersecting; update(); }, { rootMargin: '0px 0px -30% 0px' }).observe(contact);
+  } else if (mcta) {
+    mcta.classList.add('show');
+  }
+
   /* Grants catalog: filters + search (works without JS: all cards visible) */
   var catalog = document.getElementById('catalog');
   if (catalog) {

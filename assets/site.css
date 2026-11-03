@@ -78,7 +78,7 @@ p{margin:0}
 .about{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:56px;align-items:start}
 .portrait{display:block;width:100%;aspect-ratio:493/740;object-fit:cover;object-position:top;border-radius:16px;max-height:560px}
 .about-text{display:flex;flex-direction:column;gap:18px}
-.about-text>p{color:var(--muted)}
+.about-text>p:not(.eyebrow){color:var(--muted)}
 
 /* tick lists */
 .ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
@@ -200,41 +200,129 @@ p{margin:0}
 .legal h2{font-size:23px;margin:32px 0 10px}
 .legal p,.legal li{color:var(--muted);margin-bottom:10px}
 
-/* mobile sticky CTA */
+/* mobile sticky CTA: appears after the hero, hides at the contact form (site.js) */
 .mcta{display:none}
 
 @media (max-width:1100px){.nav{gap:18px}}
 @media (max-width:960px){
   .g4,.steps{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hero-grid,.g2,.g3,.about{grid-template-columns:minmax(0,1fr)}
-  .hero-grid{gap:32px}
-  .about{gap:32px}
-  .portrait{max-width:360px;max-height:440px}
+  .hero-grid{gap:28px}
+  .about{gap:28px}
   .menu-btn{display:inline-flex;align-items:center}
   .hact .btn{display:none}
-  .nav{display:none;position:absolute;left:0;right:0;top:72px;background:var(--navy);flex-direction:column;align-items:stretch;gap:0;padding:8px 32px 20px;border-top:1px solid rgba(255,255,255,.1)}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--navy);flex-direction:column;align-items:stretch;gap:0;padding:4px 32px 16px;border-top:1px solid rgba(255,255,255,.1);box-shadow:0 12px 24px rgba(0,0,0,.25)}
   .nav.open{display:flex}
   .nav a{font-size:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .nav a:last-child{border-bottom:0}
   .nav a[aria-current]{border-bottom:1px solid rgba(255,255,255,.1)}
   .cards,.who{grid-template-columns:minmax(0,1fr)}
   .cat-side{position:static}
-  .mcta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(19,34,57,.96);box-shadow:0 -6px 20px rgba(0,0,0,.2)}
+  .mcta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);border-top:1px solid var(--line);box-shadow:0 -6px 18px rgba(19,34,57,.12);transform:translateY(110%);transition:transform .25s ease;visibility:hidden}
+  .mcta.show{transform:none;visibility:visible}
   .mcta .btn{width:100%;min-height:50px}
-  body{padding-bottom:72px}
+  body{padding-bottom:76px}
 }
-@media (max-width:560px){
-  .wrap{padding:0 16px}
-  .nav{padding:8px 16px 20px}
-  .g4,.steps{grid-template-columns:minmax(0,1fr)}
-  .sec{padding:56px 0}
-  .hero{padding:40px 0}
-  .hero h1{font-size:32px}
-  .page-hero h1,.legal h1{font-size:30px}
-  .h2{font-size:27px}
-  .facts{grid-template-columns:minmax(0,1fr)}
-  .ptable th,.ptable td{padding:14px}
-  .ptable td:last-child{white-space:normal}
-  .lang a,.lang span{padding:7px 10px}
+@media (max-width:640px){
+  body{font-size:17px;line-height:1.6}
+  .wrap{padding:0 18px}
+  .hb{height:60px}
   .logo{font-size:21px}
+  .lang{font-size:14px}
+  .lang a,.lang span{padding:6px 10px}
+  .menu-btn{min-height:42px;padding:0 12px;font-size:15px}
+  .nav{padding:4px 18px 14px}
+  .sec{padding:44px 0}
+  .stack{gap:24px}
+  .head{gap:8px}
+  .eyebrow{font-size:15px}
+  .h2{font-size:26px;line-height:1.25}
+  .h3{font-size:19px}
+  .lead{font-size:17px}
+
+  /* hero: photo first as a slim banner, then short text, full-width buttons */
+  .hero{padding:16px 0 32px}
+  .hero-grid{gap:20px}
+  .hero-grid picture{order:-1}
+  .hero-photo{aspect-ratio:16/9;border-radius:12px}
+  .hero-copy{gap:16px}
+  .hero h1{font-size:30px;line-height:1.2}
+  .hero .cta-row{flex-direction:column;align-items:stretch;gap:10px}
+  .hero .cta-row a{width:100%;justify-content:center}
+  .micro{font-size:15px;text-align:center}
+
+  /* key facts: 2 x 2 */
+  .keys{padding:18px 0}
+  .keys .g4{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}
+  .key{gap:8px;font-size:14px;line-height:1.35}
+  .key b{font-size:15px}
+  .kico{width:22px;height:22px;margin-top:0}
+
+  /* about: compact landscape crop of the portrait */
+  .portrait{aspect-ratio:4/3;max-height:none;object-position:50% 18%;border-radius:12px}
+  .about-text{gap:14px}
+  .ticks{gap:8px}
+  .ticks li{padding-left:26px}
+  .ticks.sm li{font-size:16px}
+
+  /* services */
+  .g3{gap:14px}
+  .svc{padding:20px;gap:10px;border-radius:12px}
+  .svc>p{font-size:16px}
+  .svc .ticks{padding-top:10px}
+
+  /* who: plain list, no boxes */
+  .who{gap:10px}
+  .who li{background:none;border:0;border-radius:0;padding:0 0 0 26px}
+  .who li::before{left:0;top:0}
+  .note{padding:14px 16px;gap:8px}
+  .note p{flex-basis:100%;font-size:16px}
+
+  /* steps: number left, text right */
+  .steps{grid-template-columns:minmax(0,1fr);gap:16px}
+  .step{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:14px;row-gap:2px;align-items:start}
+  .dot{width:36px;height:36px;font-size:15px;grid-row:span 2}
+  .step .h3{font-size:18px;margin-top:6px}
+  .step p{font-size:16px}
+
+  /* prices: each service as a row card */
+  .ptable thead{display:none}
+  .ptable,.ptable tbody,.ptable tr,.ptable td{display:block;width:100%}
+  .ptable tr{padding:14px 16px;border-bottom:1px solid var(--line)}
+  .ptable tr:last-child{border-bottom:0}
+  .ptable td{padding:0;border:0}
+  .ptable td:last-child{margin-top:4px;color:var(--gold);white-space:normal}
+  .ptable small{font-size:14px}
+  .box{padding:18px;gap:10px;border-radius:12px}
+  .box p{font-size:16px}
+  .hero ~ .sec .cta-row .btn{width:100%}
+
+  /* faq */
+  .faq details{padding:10px 0}
+  .faq summary{font-size:17px}
+  .faq details p{font-size:16px}
+
+  /* contact + form */
+  .c-left{gap:14px}
+  .citem span{width:64px}
+  .form{padding:20px;gap:12px;border-radius:12px}
+  .field input{height:50px}
+  .site-f{padding:28px 0;font-size:15px}
+  .f-links{gap:14px}
+
+  /* catalog */
+  .page-hero{padding:24px 0 28px}
+  .page-hero h1{font-size:28px}
+  .search input{flex-basis:100%}
+  .search .btn{width:100%}
+  .cat{padding:24px 0 44px}
+  .fgroup{gap:6px}
+  .flabel{flex-basis:100%;margin:0}
+  .fbtn{min-height:42px;padding:0 14px;font-size:15px}
+  .gcard{padding:18px;gap:12px}
+  .gcard .btn-dark{width:100%;justify-content:center}
+  .facts{grid-template-columns:minmax(0,1fr);gap:8px}
+  .legal{padding:32px 0 44px}
+  .legal h1{font-size:28px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
